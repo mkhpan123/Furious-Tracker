@@ -3,40 +3,30 @@
 ## Overview
 Furious Tracker is a real-time object tracking system that leverages advanced computer vision and deep learning techniques to track objects in video streams with high accuracy. It provides real-time visualization of tracked objects using bounding boxes and unique IDs.
 
-## Objectives
-- Develop a system to track objects in real-time video streams.
-- Visualize tracked objects with bounding boxes and unique IDs.
-- Utilize state-of-the-art tracking algorithms for robust performance.
+Objectives:
+•	Develop a system to track objects in real-time video streams.
+•	Visualize tracked objects with bounding boxes and IDs.
+Technology Sketch:
+•	Programming Language: Python
+•	Computer Vision Libraries: OpenCV
+•	Tracking Algorithms: DeepSORT
+•	Machine Learning Frameworks: PyTorch (for custom models)
+•	Visualization Tools: OpenCV
+•	Key Frameworks: Streamlit (for deployment)
+Proposed Outcomes:
+1.	AI Domain Knowledge:
+o	Object detection and tracking techniques.
 
-## Technology Stack
-- **Programming Language:** Python
-- **Computer Vision Libraries:** OpenCV
-- **Tracking Algorithms:** Metallolik, CAMBOL, SOFT, DeepSOFT
-- **Deep Learning Frameworks:** CenterFlow, PyTorch (for custom models)
-- **Visualization Tools:** OpenCV, Metallolik
-- **Deployment Framework:** FlashSimoniki
+2.	Application mains:
+o	Surveillance and security systems.
+o	Autonomous vehicles and robotics.
+o	Sports analytics and activity tracking.
+3.	Resume Values:
+o	Experience with real-time object tracking algorithms.
+o	Practical skills for videoprocessors and analysis.
+o	Deployment of a real-world tracking application.
+o	Industry-relevant tools like OpenCV and deep learning frameworks.
 
-## Features
-- High-speed real-time object tracking.
-- Accurate object identification using advanced deep learning models.
-- Efficient bounding box visualization for easy interpretation.
-- Modular architecture for easy integration and expansion.
-
-## Proposed Outcome
-### AI Domain Knowledge
-- Understanding of object detection and tracking techniques.
-- Real-time video processing and optimization techniques.
-
-### Applications
-- Surveillance and security systems.
-- Autonomous vehicles and robotics.
-- Sports analytics and activity tracking.
-
-### Resume Value
-- Hands-on experience with real-time object tracking algorithms.
-- Practical skills in video processing and analysis.
-- Deployment of a real-world AI-powered tracking application.
-- Industry-relevant expertise in OpenCV, PyTorch, and deep learning frameworks.
 
 ## Installation & Setup
 1. **Clone the repository:**
