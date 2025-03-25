@@ -24,10 +24,10 @@ Furious Tracker is a real-time object tracking system that leverages advanced co
 •	Key Frameworks: Streamlit (for deployment)
 
 **Proposed Outcomes:**
-1.	AI Domain Knowledge:
+**1.	AI Domain Knowledge:**
 o	Object detection and tracking techniques.
 
-2.	Application mains:
+**2.	Application mains:**
    
 o	Surveillance and security systems.
 
@@ -35,7 +35,7 @@ o	Autonomous vehicles and robotics.
 
 o	Sports analytics and activity tracking.
 
-4.	Resume Values:
+**3.	Resume Values:**
 o	Experience with real-time object tracking algorithms.
 
 o	Practical skills for videoprocessors and analysis.
