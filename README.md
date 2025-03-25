@@ -5,8 +5,11 @@ Furious Tracker is a real-time object tracking system that leverages advanced co
 
 Objectives:
 •	Develop a system to track objects in real-time video streams.
+
 •	Visualize tracked objects with bounding boxes and IDs.
+
 Technology Sketch:
+
 •	Programming Language: Python
 •	Computer Vision Libraries: OpenCV
 •	Tracking Algorithms: DeepSORT
