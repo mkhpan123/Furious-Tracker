@@ -11,11 +11,17 @@ Objectives:
 Technology Sketch:
 
 •	Programming Language: Python
+
 •	Computer Vision Libraries: OpenCV
+
 •	Tracking Algorithms: DeepSORT
+
 •	Machine Learning Frameworks: PyTorch (for custom models)
+
 •	Visualization Tools: OpenCV
+
 •	Key Frameworks: Streamlit (for deployment)
+
 Proposed Outcomes:
 1.	AI Domain Knowledge:
 o	Object detection and tracking techniques.
