@@ -22,7 +22,7 @@ Technology Sketch:
 
 •	Key Frameworks: Streamlit (for deployment)
 
-Proposed Outcomes:
+**Proposed Outcomes:**
 1.	AI Domain Knowledge:
 o	Object detection and tracking techniques.
 
