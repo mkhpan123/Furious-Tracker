@@ -28,13 +28,20 @@ Furious Tracker is a real-time object tracking system that leverages advanced co
 o	Object detection and tracking techniques.
 
 2.	Application mains:
+   
 o	Surveillance and security systems.
+
 o	Autonomous vehicles and robotics.
+
 o	Sports analytics and activity tracking.
-3.	Resume Values:
+
+4.	Resume Values:
 o	Experience with real-time object tracking algorithms.
+
 o	Practical skills for videoprocessors and analysis.
+
 o	Deployment of a real-world tracking application.
+
 o	Industry-relevant tools like OpenCV and deep learning frameworks.
 
 
