@@ -87,3 +87,50 @@ source_radio = st.sidebar.radio(
     "Select Source", SOURCES_LIST
 )
 
+source_image = None
+if source_radio == IMAGE:
+    source_image = st.sidebar.file_uploader(
+        "Choose an Image....", type = ("jpg", "png", "jpeg", "bmp", "webp")
+    )
+    col1, col2 = st.columns(2)
+    with col1:
+        try:
+            if source_image is None:
+                default_image_path = str(DEFAULT_IMAGE)
+                default_image = Image.open(default_image_path)
+                st.image(default_image_path, caption = "Default Image", use_column_width=True)
+            else:
+                uploaded_image  =Image.open(source_image)
+                st.image(source_image, caption = "Uploaded Image", use_column_width = True)
+        except Exception as e:
+            st.error("Error Occured While Opening the Image")
+            st.error(e)
+    with col2:
+        try:
+            if source_image is None:
+                default_detected_image_path = str(DEFAULT_DETECT_IMAGE)
+                default_detected_image = Image.open(default_detected_image_path)
+                st.image(default_detected_image_path, caption = "Detected Image", use_column_width = True)
+            else:
+                if st.sidebar.button("Detect Objects"):
+                    result = model.predict(uploaded_image, conf = confidence_value)
+                    boxes = result[0].boxes
+                    result_plotted = result[0].plot()[:,:,::-1]
+                    st.image(result_plotted, caption = "Detected Image", use_column_width = True)
+
+                    try:
+                        with st.expander("Detection Results"):
+                            for box in boxes:
+                                st.write(box.data)
+                    except Exception as e:
+                        st.error(e)
+        except Exception as e:
+            st.error("Error Occured While Opening the Image")
+            st.error(e)
+
+elif source_radio == VIDEO:
+    source_video = st.sidebar.selectbox(
+        "Choose a Video...", VIDEOS_DICT.keys()
+    )
+
+
