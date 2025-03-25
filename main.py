@@ -53,3 +53,37 @@ st.set_page_config(
     page_title = "YOLO11",
     page_icon = "🤖"
 )
+
+#Header
+st.header("Object Detection using YOLO11")
+
+#SideBar
+st.sidebar.header("Model Configurations")
+
+#Choose Model: Detection, Segmentation or Pose Estimation
+model_type = st.sidebar.radio("Task", ["Detection", "Segmentation", "Pose Estimation"])
+
+#Select Confidence Value
+confidence_value = float(st.sidebar.slider("Select Model Confidence Value", 25, 100, 40))/100
+
+#Selecting Detection, Segmentation, Pose Estimation Model
+if model_type == 'Detection':
+    model_path = Path(DETECTION_MODEL)
+elif model_type == 'Segmentation':
+    model_path = Path(SEGMENTATION_MODEL)
+elif model_type ==  'Pose Estimation':
+    model_path = Path(POSE_ESTIMATION_MODEL)
+
+#Load the YOLO Model
+try:
+    model = YOLO(model_path)
+except Exception as e:
+    st.error(f"Unable to load model. Check the sepcified path: {model_path}")
+    st.error(e)
+
+#Image / Video Configuration
+st.sidebar.header("Image/Video Config")
+source_radio = st.sidebar.radio(
+    "Select Source", SOURCES_LIST
+)
+
