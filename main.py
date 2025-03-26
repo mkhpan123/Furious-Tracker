@@ -132,5 +132,29 @@ elif source_radio == VIDEO:
     source_video = st.sidebar.selectbox(
         "Choose a Video...", VIDEOS_DICT.keys()
     )
-
-
+    with open(VIDEOS_DICT.get(source_video), 'rb') as video_file:
+        video_bytes = video_file.read()
+        if video_bytes:
+            st.video(video_bytes)
+        if st.sidebar.button("Detect Video Objects"):
+            try:
+                video_cap = cv2.VideoCapture(
+                    str(VIDEOS_DICT.get(source_video))
+                )
+                st_frame = st.empty()
+                while (video_cap.isOpened()):
+                    success, image = video_cap.read()
+                    if success:
+                        image = cv2.resize(image, (720, int(720 * (9/16))))
+                        #Predict the objects in the image using YOLO11
+                        result = model.predict(image, conf = confidence_value)
+                        #Plot the detected objects on the video frame
+                        result_plotted = result[0].plot()
+                        st_frame.image(result_plotted, caption = "Detected Video",
+                                       channels = "BGR",
+                                       use_column_width=True)
+                    else:
+                        video_cap.release()
+                        break
+            except Exception as e:
+                st.sidebar.error("Error Loading Video"+str(e))
