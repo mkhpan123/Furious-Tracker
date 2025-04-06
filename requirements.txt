@@ -1,2 +1,3 @@
 ultralytics
 streamlit
+deep_sort_realtime
