@@ -181,6 +181,34 @@ def draw_tracks(image, tracks, model, highlight_label, object_labels):
         draw_single_track(track, label, highlight=True)
 
     return image
+# Main video processing with local tracker per session
+def process_video(video_cap, model, deepsort, confidence_value, highlight_label, object_labels, st_frame):
+    try:
+        while video_cap.isOpened():
+            success, image = video_cap.read()
+            if not success:
+                break
+
+            image_resized = resize_frame(image)
+            boxes = run_object_detection(image_resized, model, confidence_value)
+            detections = prepare_detections(boxes)
+
+            try:
+                tracks = track_objects(detections, image_resized, deepsort)
+            except Exception as e:
+                st.write(f"Tracking Error: {e}")
+                continue
+
+            image_annotated = draw_tracks(image_resized, tracks, model, highlight_label, object_labels)
+            img=image_annotated if st.session_state.run_detection else image
+            st_frame.image(img, caption="Detected and Tracked Video", channels="BGR", use_container_width=True)
+
+        video_cap.release()
+
+    except Exception as e:
+        st.sidebar.error(f"Error Processing Video: {e}")
+
+
 
 
 source_image = None
