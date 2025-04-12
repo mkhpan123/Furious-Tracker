@@ -1,4 +1,5 @@
 #Import All the Required Libraries
+
 import cv2
 import streamlit as st
 from pathlib import Path
@@ -6,8 +7,6 @@ import sys
 from ultralytics import YOLO
 from PIL import Image
 from deep_sort_realtime.deepsort_tracker import DeepSort
-
-
 
 #Get the absolute path of the current file
 FILE = Path(__file__).resolve()
