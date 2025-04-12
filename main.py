@@ -94,6 +94,93 @@ source_radio = st.sidebar.radio(
     "Select Source", SOURCES_LIST
 )
 
+def load_video(source_video):
+    return cv2.VideoCapture(source_video)
+
+def resize_frame(image, new_width=720):
+    height, width = image.shape[:2]
+    new_height = int((height / width) * new_width)
+    return cv2.resize(image, (new_width, new_height))
+
+def run_object_detection(image, model, confidence):
+    result = model.predict(image, conf=confidence, verbose=False)
+    return result[0].boxes
+
+def prepare_detections(boxes):
+    detections = []
+    for box in boxes:
+        try:
+            coordinates = box.xyxy[0].tolist()
+            if len(coordinates) != 4:
+                continue
+            x1, y1, x2, y2 = coordinates
+            conf = box.conf[0].item()
+            class_id = int(box.cls[0].item())
+            detections.append(([x1, y1, x2 - x1, y2 - y1], conf, class_id))
+        except:
+            continue
+    return detections
+
+def track_objects(detections, image, deepsort):
+    return deepsort.update_tracks(detections, frame=image)
+
+def draw_tracks(image, tracks, model, highlight_label, object_labels):
+    normal_tracks = []
+    highlighted_tracks = []
+
+    for track in tracks:
+        if not track.is_confirmed():
+            continue
+
+        track_id = track.track_id
+        class_id = track.get_det_class()
+        class_name = model.names[class_id]
+
+        if track_id not in object_labels:
+            object_labels[track_id] = f"{class_name}:{track_id}"
+
+        label = object_labels[track_id]
+
+        if label == highlight_label:
+            highlighted_tracks.append((track, label))
+        else:
+            normal_tracks.append((track, label))
+
+    def draw_single_track(track, label, highlight=False):
+        x1, y1, x2, y2 = track.to_ltrb()
+        color = (0, 0, 255) if highlight else (255, 0, 0)
+        thickness = 2 if highlight else 1
+
+        # Bounding box
+        cv2.rectangle(image, (int(x1), int(y1)), (int(x2), int(y2)), color, thickness)
+
+        # Text background
+        (text_width, text_height), baseline = cv2.getTextSize(label, cv2.FONT_HERSHEY_SIMPLEX, 0.5, 1)
+        bg_top_left = (int(x1), int(y1) - text_height - 10)
+        bg_bottom_right = (int(x1) + text_width + 4, int(y1))
+        cv2.rectangle(image, bg_top_left, bg_bottom_right, color, thickness=cv2.FILLED)
+
+        # Text
+        cv2.putText(
+            image,
+            label,
+            (int(x1) + 2, int(y1) - 5),
+            cv2.FONT_HERSHEY_SIMPLEX,
+            0.5,
+            (255, 255, 255),
+            1,
+            cv2.LINE_AA
+        )
+
+    # Draw non-highlighted tracks
+    for track, label in normal_tracks:
+        draw_single_track(track, label)
+
+    # Draw highlighted tracks
+    for track, label in highlighted_tracks:
+        draw_single_track(track, label, highlight=True)
+
+    return image
 
 
 source_image = None
