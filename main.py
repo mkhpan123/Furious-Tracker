@@ -249,3 +249,44 @@ if source_radio == IMAGE:
             st.error("Error Occured While Opening the Image")
             st.error(e)
 
+elif source_radio == VIDEO:
+    # Choose video and load bytes
+    selected_video_name = st.sidebar.selectbox(
+            "Or choose from default videos", VIDEOS_DICT.keys()
+        )
+    source_video = str(VIDEOS_DICT[selected_video_name])
+    
+    if "video_source" not in st.session_state or st.session_state.video_source != source_video:
+        st.session_state.video_source = source_video  # First time initializing video source
+        st.session_state.deepsort = DeepSort()  # Initialize DeepSort
+        st.session_state.object_labels = {}  # Initialize object labels
+        st.session_state.video_cap = load_video(source_video)  # Create a new video capture object
+        st.session_state.st_frame = st.empty()  # Create a new frame placeholder
+        st.session_state.run_detection=False
+    
+    # Text input for highlighting a label
+    highlight_label = st.sidebar.text_input("Enter the label to highlight (e.g., Object1)", "", key="highlight_input")
+
+    # Detect button to update session state
+    if( st.sidebar.button("Track Video Objects")):
+        st.session_state.run_detection=not st.session_state.run_detection
+    # Use the existing deepsort and object_labels from session_state
+    deepsort = st.session_state.deepsort
+    object_labels = st.session_state.object_labels
+
+    # Use the video capture and frame placeholder from session state
+    video_cap = st.session_state.video_cap
+    st_frame = st.session_state.st_frame
+
+
+    # Process the video with detection logic
+    process_video(video_cap, model, deepsort, confidence_value, highlight_label, object_labels, st_frame)
+    
+    # Reset detection flag after processing
+    st.session_state.video_source = source_video  # First time initializing video source
+    st.session_state.deepsort = DeepSort()  # Initialize DeepSort
+    st.session_state.object_labels = {}  # Initialize object labels
+    st.session_state.video_cap = load_video(source_video)  # Create a new video capture object
+    st.session_state.st_frame = st.empty()  # Create a new frame placeholder
+    st.session_state.run_detection=False
+
