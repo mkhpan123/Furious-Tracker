@@ -207,10 +207,7 @@ def process_video(video_cap, model, deepsort, confidence_value, highlight_label,
 
     except Exception as e:
         st.sidebar.error(f"Error Processing Video: {e}")
-
-
-
-
+        
 source_image = None
 if source_radio == IMAGE:
     source_image = st.sidebar.file_uploader(
