@@ -56,19 +56,19 @@ st.set_page_config(
     page_icon = "🤖"
 )
 
-#deepsort
-deepsort = DeepSort()
-# Create a dictionary to store the label mapping
-object_labels = {}
+# #deepsort
+# deepsort = DeepSort()
+# # Create a dictionary to store the label mapping
+# object_labels = {}
 
 #Header
-st.header("Object Detection using YOLO11")
+st.header("Object Tracking")
 
 #SideBar
 st.sidebar.header("Model Configurations")
 
 #Choose Model: Detection, Segmentation or Pose Estimation
-model_type = st.sidebar.radio("Task", ["Detection", "Segmentation", "Pose Estimation"])
+model_type = "Detection"#st.sidebar.radio("Task", ["Detection"])#, "Segmentation", "Pose Estimation"]) keeping it simple
 
 #Select Confidence Value
 confidence_value = float(st.sidebar.slider("Select Model Confidence Value", 25, 100, 40))/100
@@ -93,6 +93,8 @@ st.sidebar.header("Image/Video Config")
 source_radio = st.sidebar.radio(
     "Select Source", SOURCES_LIST
 )
+
+
 
 source_image = None
 if source_radio == IMAGE:
