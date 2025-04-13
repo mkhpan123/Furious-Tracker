@@ -265,7 +265,7 @@ elif source_radio == VIDEO:
         st.session_state.run_detection=False
     
     # Text input for highlighting a label
-    highlight_label = st.sidebar.text_input("Enter the label to highlight (e.g., Object1)", "", key="highlight_input")
+    highlight_label = st.sidebar.text_input("Enter the label to highlight (e.g.,Car:1)", "", key="highlight_input")
 
     # Detect button to update session state
     if( st.sidebar.button("Track Video Objects")):
