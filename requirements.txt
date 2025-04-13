@@ -1,4 +1,5 @@
-ultralytics
-streamlit
-deep_sort_realtime
 opencv-python
+streamlit
+ultralytics
+pillow
+deep_sort_realtime
