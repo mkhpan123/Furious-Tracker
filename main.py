@@ -3,10 +3,22 @@
 import cv2
 import streamlit as st
 from pathlib import Path
+import asyncio
 import sys
 from ultralytics import YOLO
 from PIL import Image
 from deep_sort_realtime.deepsort_tracker import DeepSort
+
+# --- Fix for Runtime Errors ---
+# Fix for "no running event loop" in Streamlit
+try:
+    asyncio.get_running_loop()
+except RuntimeError:
+    asyncio.set_event_loop(asyncio.new_event_loop())
+
+# Prevent PyTorch model introspection crash inside Streamlit
+if any("streamlit" in mod for mod in sys.modules):
+    import torch
 
 #Get the absolute path of the current file
 FILE = Path(__file__).resolve()
